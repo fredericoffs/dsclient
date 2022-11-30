@@ -3,12 +3,15 @@ package com.fredericoffs.client.services;
 import com.fredericoffs.client.dto.ClientDTO;
 import com.fredericoffs.client.entities.Client;
 import com.fredericoffs.client.repositories.ClientRepository;
+import com.fredericoffs.client.services.exceptions.DatabaseException;
 import com.fredericoffs.client.services.exceptions.ResourceNotFoundException;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import javax.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
@@ -67,6 +70,16 @@ public class ClientService {
       return new ClientDTO(entity);
     } catch (EntityNotFoundException e) {
       throw new ResourceNotFoundException("Client id not found " + id);
+    }
+  }
+
+  public void delete(Long id) {
+    try {
+      repository.deleteById(id);
+    } catch (EmptyResultDataAccessException e) {
+      throw new ResourceNotFoundException("Category id not found " + id);
+    } catch (DataIntegrityViolationException e) {
+      throw new DatabaseException("Integrity violation.");
     }
   }
 }
