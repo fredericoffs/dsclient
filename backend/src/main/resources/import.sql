@@ -1,0 +1,2 @@
+insert into tb_client (name, cpf, income, birth_date, children) values ('Frederico Silva', '010101010000', 1000.00, TIMESTAMP WITH TIME ZONE '1979-08-31T12:51:00Z', 0)
+insert into tb_client (name, cpf, income, birth_date, children) values ('João Silva', '020202020200', 2000.00, TIMESTAMP WITH TIME ZONE '1981-10-31T00:12:00Z', 2)
