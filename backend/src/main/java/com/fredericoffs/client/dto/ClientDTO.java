@@ -1,35 +1,23 @@
-package com.fredericoffs.client.entities;
+package com.fredericoffs.client.dto;
 
 import java.io.Serializable;
 import java.time.Instant;
-import java.util.Objects;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
 
-@Entity
-@Table(name = "tb_client")
-public class Client implements Serializable {
+public class ClientDTO implements Serializable {
 
   private static final long serialVersionUID = 1L;
 
-  @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
   private String name;
   private String cpf;
   private Double income;
-  @Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
   private Instant birthDate;
   private Integer children;
 
-  public Client() {
+  public ClientDTO() {
   }
 
-  public Client(Long id, String name, String cpf, Double income, Instant birthDate,
+  public ClientDTO(Long id, String name, String cpf, Double income, Instant birthDate,
       Integer children) {
     this.id = id;
     this.name = name;
@@ -85,22 +73,5 @@ public class Client implements Serializable {
 
   public void setChildren(Integer children) {
     this.children = children;
-  }
-
-  @Override
-  public boolean equals(Object o) {
-    if (this == o) {
-      return true;
-    }
-    if (o == null || getClass() != o.getClass()) {
-      return false;
-    }
-    Client client = (Client) o;
-    return Objects.equals(id, client.id);
-  }
-
-  @Override
-  public int hashCode() {
-    return Objects.hash(id);
   }
 }
