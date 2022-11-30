@@ -77,7 +77,7 @@ public class ClientService {
     try {
       repository.deleteById(id);
     } catch (EmptyResultDataAccessException e) {
-      throw new ResourceNotFoundException("Category id not found " + id);
+      throw new ResourceNotFoundException("Client id not found " + id);
     } catch (DataIntegrityViolationException e) {
       throw new DatabaseException("Integrity violation.");
     }
